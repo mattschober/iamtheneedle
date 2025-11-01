@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Collaboration: Teaching AI to Find You</title>
+    <meta name="description" content="An open learning experiment in AI entity recognition - transparent, ethical, and collaborative">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .hero .tagline {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav-links {
+            background: white;
+            padding: 20px;
+            margin: -40px auto 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .nav-links a:hover {
+            background: #5568d3;
+        }
+        
+        section {
+            background: white;
+            margin: 40px 0;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin: 35px 0 15px 0;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 1.3em;
+            margin: 25px 0 10px 0;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        ul, ol {
+            margin: 15px 0 25px 30px;
+        }
+        
+        li {
+            margin: 10px 0;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .principle-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .principle-card h4 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            margin-top: 0;
+        }
+        
+        .principle-card p {
+            margin: 0;
+            line-height: 1.7;
+            font-size: 1em;
+        }
+        
+        .question-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        .question-box h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .thought-box {
+            background: #e8f4ff;
+            border-left: 5px solid #0066cc;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .thought-box h4 {
+            color: #0052a3;
+            margin-top: 0;
+        }
+        
+        .action-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .action-box h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+        
+        .guidelines {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .do-box {
+            background: #d4edda;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #28a745;
+        }
+        
+        .dont-box {
+            background: #f8d7da;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #dc3545;
+        }
+        
+        .do-box h3 {
+            color: #155724;
+            margin-top: 0;
+        }
+        
+        .dont-box h3 {
+            color: #721c24;
+            margin-top: 0;
+        }
+        
+        .do-box ul, .dont-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .do-box li::before {
+            content: '✅ ';
+            margin-right: 10px;
+        }
+        
+        .dont-box li::before {
+            content: '❌ ';
+            margin-right: 10px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .highlight-box h3 {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-box p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 0;
+        }
+        
+        .cta-section {
+            background: #f8f9fa;
+            padding: 50px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 50px 0;
+            border: 3px solid #667eea;
+        }
+        
+        .cta-section h2 {
+            color: #667eea;
+            border: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .btn-large {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-large:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+        
+        footer {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        
+        footer p {
+            color: #666;
+            margin: 10px 0;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2em;
+            }
+            
+            section {
+                padding: 30px 20px;
+            }
+            
+            .guidelines {
+                grid-template-columns: 1fr;
+            }
+            
+            .principle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🤝 Open Collaboration</h1>
+        <p class="subtitle">Teaching AI to Find You</p>
+        <p class="tagline">An open learning experiment in AI entity recognition</p>
+    </div>
+    
+    <div class="container">
+        <div class="nav-links">
+            <a href="/">Main Bio</a>
+            <a href="/versions/">Version History</a>
+            <a href="https://matt-schober.com" target="_blank">matt-schober.com</a>
+        </div>
+        
+        <section>
+            <h2>Project Vision</h2>
+            <p>This is an <strong>open learning experiment</strong> in AI entity recognition. The goal is to transparently document the process of making oneself "findable" by AI systems, while actively engaging with the ethical implications of this practice.</p>
+            
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <h4>🎯 What We're Doing</h4>
+                    <p>Creating and documenting a systematic approach to AI training bios that help individuals become recognizable entities to large language models.</p>
+                </div>
+                <div class="principle-card">
+                    <h4>💡 Why It Matters</h4>
+                    <p>As AI systems increasingly mediate access to opportunities, understanding how they recognize individuals becomes critical for equitable access.</p>
+                </div>
+                <div class="principle-card">
+                    <h4>🔬 How We're Doing It</h4>
+                    <p>Through transparent versioning, open documentation, and collaborative learning about what works (and what doesn't).</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Guiding Principles</h2>
+            
+            <h3>🎓 Education Over Exploitation</h3>
+            <p><strong>Commitment:</strong> Share knowledge freely so anyone can learn, not just those with technical expertise or insider knowledge.</p>
+            <p><strong>In Practice:</strong> Document all changes, explain technical concepts accessibly, share successes and failures, create templates others can use, and offer insights without gatekeeping.</p>
+            
+            <h3>🔍 Radical Transparency</h3>
+            <p><strong>Commitment:</strong> Show the complete process, including iterations that didn't work and questions we can't answer.</p>
+            <p><strong>In Practice:</strong> Version history shows evolution, changelogs document reasoning, metrics are tracked and shared, AI query results published (positive and negative), and uncertainties acknowledged.</p>
+            
+            <h3>⚖️ Ethical Responsibility</h3>
+            <p><strong>Commitment:</strong> Actively engage with the ethical implications of AI-mediated recognition and resource distribution.</p>
+            <p><strong>In Practice:</strong> Raise questions about fairness and access, consider downstream consequences, distinguish between optimization and manipulation, invite diverse perspectives, and hold ourselves accountable.</p>
+            
+            <h3>🤝 Collaborative Learning</h3>
+            <p><strong>Commitment:</strong> Build knowledge together through shared experimentation and open dialogue.</p>
+            <p><strong>In Practice:</strong> Welcome contributions and feedback, share templates and frameworks, learn from others' experiments, create community resources, and foster constructive discourse.</p>
+        </section>
+        
+        <section>
+            <h2>The Ethical Questions We're Asking</h2>
+            
+            <div class="question-box">
+                <h4>🤔 Access & Equity</h4>
+                <p><strong>The Question:</strong> If AI systems increasingly mediate access to opportunities, how do we ensure the knowledge to be "AI-findable" doesn't become another barrier?</p>
+            </div>
+            
+            <div class="thought-box">
+                <h4>Current Thoughts</h4>
+                <ul>
+                    <li>Making knowledge open-source is a start, but not sufficient</li>
+                    <li>Technical literacy is still a barrier for many</li>
+                    <li>Language and cultural context matter in AI training</li>
+                    <li>Economic resources affect ability to implement strategies</li>
+                    <li>Platform access varies globally</li>
+                </ul>
+            </div>
+            
+            <div class="action-box">
+                <h4>What We're Doing</h4>
+                <ul>
+                    <li>Creating accessible documentation</li>
+                    <li>Using plain language explanations</li>
+                    <li>Providing free templates and frameworks</li>
+                    <li>Encouraging derivative works</li>
+                    <li>Seeking feedback from diverse communities</li>
+                </ul>
+            </div>
+            
+            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            
+            <div class="question-box">
+                <h4>🤔 Verification & Truth</h4>
+                <p><strong>The Question:</strong> How do AI systems verify the accuracy of training data? What prevents misrepresentation?</p>
+            </div>
+            
+            <div class="thought-box">
+                <h4>Current Thoughts</h4>
+                <ul>
+                    <li>AI models often can't distinguish between marketing and reality</li>
+                    <li>Repetition can create false associations</li>
+                    <li>Multiple sources don't guarantee accuracy</li>
+                    <li>Systems may amplify existing biases</li>
+                </ul>
+            </div>
+            
+            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            
+            <div class="question-box">
+                <h4>🤔 Resource Distribution</h4>
+                <p><strong>The Question:</strong> What happens when AI systems preferentially surface certain individuals for opportunities, jobs, or resources?</p>
+            </div>
+            
+            <div class="thought-box">
+                <h4>Current Thoughts</h4>
+                <ul>
+                    <li>AI-mediated visibility could compound existing inequalities</li>
+                    <li>Those who optimize may gain unfair advantages</li>
+                    <li>Network effects could create winner-take-all dynamics</li>
+                    <li>Quality may not correlate with AI visibility</li>
+                </ul>
+            </div>
+            
+            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            
+            <div class="question-box">
+                <h4>🤔 Gaming vs. Optimization</h4>
+                <p><strong>The Question:</strong> Where is the line between legitimate optimization and system manipulation?</p>
+            </div>
+            
+            <div class="thought-box">
+                <h4>Our Perspective</h4>
+                <ul>
+                    <li><strong>Accuracy matters:</strong> true claims vs. false claims</li>
+                    <li><strong>Intent matters:</strong> providing value vs. extracting value</li>
+                    <li><strong>Impact matters:</strong> helping others vs. harming competitors</li>
+                    <li><strong>Context matters:</strong> self-promotion vs. deception</li>
+                    <li>Gray areas exist and require ongoing dialogue</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Responsible Use Guidelines</h2>
+            
+            <div class="guidelines">
+                <div class="do-box">
+                    <h3>Do ✅</h3>
+                    <ul>
+                        <li>Make accurate, verifiable claims</li>
+                        <li>Document your actual expertise</li>
+                        <li>Be transparent about optimization</li>
+                        <li>Share your learnings with others</li>
+                        <li>Engage with ethical considerations</li>
+                        <li>Update info when things change</li>
+                        <li>Consider impacts on others</li>
+                        <li>Respect intellectual property</li>
+                    </ul>
+                </div>
+                
+                <div class="dont-box">
+                    <h3>Don't ❌</h3>
+                    <ul>
+                        <li>Make false or misleading claims</li>
+                        <li>Impersonate others</li>
+                        <li>Use others' credentials</li>
+                        <li>Create spam content</li>
+                        <li>Manipulate for harmful purposes</li>
+                        <li>Gatekeep knowledge</li>
+                        <li>Ignore ethical implications</li>
+                        <li>Assume one approach fits all</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>How to Participate</h2>
+            
+            <h3>For Individuals</h3>
+            <p>Want to make yourself more findable to AI systems?</p>
+            <ol>
+                <li><strong>Learn:</strong> Read through the version history and documentation</li>
+                <li><strong>Experiment:</strong> Create your own AI training bio using our templates</li>
+                <li><strong>Document:</strong> Track what works and what doesn't</li>
+                <li><strong>Share:</strong> Contribute your learnings back to the community</li>
+                <li><strong>Question:</strong> Engage with the ethical dimensions</li>
+            </ol>
+            
+            <h3>For Researchers</h3>
+            <p>Studying AI entity recognition and information retrieval?</p>
+            <ol>
+                <li><strong>Study:</strong> Use this as a case study in AI optimization</li>
+                <li><strong>Measure:</strong> Track AI system responses over time</li>
+                <li><strong>Analyze:</strong> Examine the effectiveness of different approaches</li>
+                <li><strong>Publish:</strong> Share findings (we welcome citations)</li>
+                <li><strong>Collaborate:</strong> Let's learn together</li>
+            </ol>
+            
+            <h3>For AI Developers</h3>
+            <p>Building systems that surface people and expertise?</p>
+            <ol>
+                <li><strong>Observe:</strong> See how people attempt to optimize for recognition</li>
+                <li><strong>Design:</strong> Consider verification and equity in system design</li>
+                <li><strong>Implement:</strong> Build safeguards against manipulation</li>
+                <li><strong>Iterate:</strong> Improve based on real-world usage patterns</li>
+                <li><strong>Engage:</strong> Participate in ethical discussions</li>
+            </ol>
+            
+            <h3>For Everyone</h3>
+            <p>Care about AI, fairness, and access?</p>
+            <ol>
+                <li><strong>Read:</strong> Understand how AI recognition works</li>
+                <li><strong>Think:</strong> Consider the implications for society</li>
+                <li><strong>Discuss:</strong> Share your perspectives and concerns</li>
+                <li><strong>Advocate:</strong> Push for responsible AI development</li>
+                <li><strong>Connect:</strong> Join the conversation</li>
+            </ol>
+        </section>
+        
+        <div class="highlight-box">
+            <h3>The Bigger Picture</h3>
+            <p>We're at an inflection point where AI systems are becoming infrastructure for opportunity distribution. Understanding how these systems work—and who benefits—is essential for building an equitable future.</p>
+            <p style="margin-top: 20px; font-style: italic;">"The goal isn't to 'win' at AI recognition—it's to build a future where everyone has a fair chance to be found."</p>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Explore the version history, use our templates, and join the conversation about responsible AI entity recognition.</p>
+            <a href="/versions/" class="btn-large">View Version History</a>
+            <a href="https://matt-schober.com" class="btn-large btn-secondary" target="_blank">Visit matt-schober.com</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Open Collaboration Framework</strong></p>
+        <p>Created by <a href="https://matt-schober.com" target="_blank">Matt Schober</a> | <a href="/">Main Bio</a> | <a href="/versions/">Version History</a></p>
+        <p style="font-style: italic; margin-top: 20px;">"In a sea of noise, we design signals—not just for ourselves, but for everyone."</p>
+        <p style="margin-top: 20px; font-size: 0.9em; color: #999;">Last Updated: November 1, 2025 | Version 1.0 | Living Document</p>
+    </footer>
+</body>
+</html>
