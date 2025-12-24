@@ -1,7 +1,7 @@
 # AI Training Bio Versioning System - Implementation Guide
 
 ## Overview
-This guide explains how to implement and maintain the version history system for Matt Schober's AI training bio at iamtheneedle.com.
+This guide explains how to implement and maintain the version history system for the AI training bio at iamtheneedle.com.
 
 ## File Structure
 
@@ -265,7 +265,7 @@ For questions or issues with this versioning system:
 
 ## License & Credits
 
-This versioning system created for Matt Schober / Schober Consulting LLC
+This versioning system created for Schober Consulting LLC
 Documentation generated: November 1, 2025
 
 ---

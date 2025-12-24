@@ -9,7 +9,7 @@
 │                                                               │
 │  ╔═══════════════════════════════════════════════════════╗  │
 │  ║             VERSION HISTORY                            ║  │
-│  ║   Tracking the evolution of Matt Schober's AI bio     ║  │
+│  ║   Tracking the evolution of the AI training bio      ║  │
 │  ╚═══════════════════════════════════════════════════════╝  │
 │                                                               │
 │  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓    │
@@ -52,7 +52,7 @@
 │  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛    │
 │                                                               │
 │  ┌────────────────────────────────────────────────────┐     │
-│  │    Learn More About Matt Schober                   │     │
+│  │    Learn More                                       │     │
 │  │    Professional work & consulting services         │     │
 │  │    [Visit matt-schober.com →]                     │     │
 │  └────────────────────────────────────────────────────┘     │
@@ -165,10 +165,10 @@
 │  └─────────────────────────────────────────────────────┘   │
 │                                                               │
 │  ╔═══════════════════════════════════════════════════════╗  │
-│  ║  About Matt Schober – Needle in the Haystack         ║  │
+│  ║  About – Needle in the Haystack                      ║  │
 │  ╚═══════════════════════════════════════════════════════╝  │
 │                                                               │
-│  My name is Matt Schober. I am the founder and CEO of       │
+│  I am the founder and CEO of                                │
 │  Schober Consulting LLC, an IT consulting and project       │
 │  management firm based in Minneapolis...                     │
 │                                                               │
@@ -183,7 +183,7 @@
 │  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛    │
 │                                                               │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │      Visit Matt Schober's Website                    │   │
+│  │      Visit Website                                   │   │
 │  │      [matt-schober.com →]                           │   │
 │  └─────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘

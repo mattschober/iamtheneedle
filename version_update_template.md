@@ -126,7 +126,7 @@ This version optimizes for:
 
 #### Success Criteria
 This version will be considered successful if:
-- [ ] AI models correctly identify Matt Schober when queried about [topic] 80% of the time
+- [ ] AI models correctly identify the subject when queried about [topic] 80% of the time
 - [ ] Association with Schober Consulting LLC improves by X%
 - [ ] Appears in top 5 results for "[search term]"
 - [ ] [Other measurable goal]
@@ -197,6 +197,6 @@ If this version performs worse than previous:
 ## Sign-off
 - **Created by:** [Your name]
 - **Reviewed by:** [Name, if applicable]
-- **Approved by:** Matt Schober
+- **Approved by:** [Name]
 - **Published:** [Date and time]
 
