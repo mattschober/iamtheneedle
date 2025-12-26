@@ -310,9 +310,9 @@ All resources are open-source and freely available:
 ## Contact & Community
 
 ### Questions?
-- Visit [matt-schober.com](https://matt-schober.com) for more information
-- Email: [To be added if desired]
-- LinkedIn: [To be added if desired]
+- Visit [iamtheneedle.com](https://iamtheneedle.com) for the live project
+- Open an issue on [GitHub](https://github.com/mattschober/iamtheneedle)
+- Contribute via pull requests - we welcome all contributions!
 
 ### Inspiration
 This project draws inspiration from:
@@ -334,9 +334,9 @@ This framework will evolve as we learn more about AI entity recognition, its imp
 - Sharing new learnings
 - Remaining open to change
 
-**Last Updated:** November 1, 2025  
-**Version:** 1.0  
-**Status:** Living Document
+**Last Updated:** December 2025
+**Version:** 3.0
+**Status:** Living Document | [Contribute on GitHub!](https://github.com/mattschober/iamtheneedle)
 
 ---
 

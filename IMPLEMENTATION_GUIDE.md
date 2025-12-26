@@ -265,8 +265,8 @@ For questions or issues with this versioning system:
 
 ## License & Credits
 
-This versioning system created for Schober Consulting LLC
-Documentation generated: November 1, 2025
+This versioning system is part of the SEO for AI open-source project.
+Documentation generated: December 2025 | Contribute on GitHub!
 
 ---
 
