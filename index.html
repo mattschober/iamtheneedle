@@ -120,67 +120,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: white;
         }
 
-        /* ── Background video ── */
-        .bg-video {
+        /* ── Full-viewport video player ── */
+        .player {
             position: fixed;
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: #000;
             z-index: 0;
-        }
-
-        /* Dark overlay so text is always legible */
-        .bg-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1;
-        }
-
-        /* ── Centered text layer ── */
-        .fullscreen {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100vw;
-            height: 100vh;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .main-statement {
-            font-size: clamp(2rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.02em;
-            max-width: 900px;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.6);
-        }
-
-        /* Blinking cursor appended while typing */
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background: white;
-            margin-left: 4px;
-            vertical-align: text-bottom;
-            animation: blink 0.75s step-end infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0; }
-        }
-
-        /* Cursor stops blinking and fades out after typing finishes */
-        .cursor.done {
-            animation: none;
-            opacity: 0;
-            transition: opacity 0.8s ease 1.5s;
         }
 
         /* ── Versions button fixed to bottom-right ── */
@@ -251,9 +199,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             margin-bottom: 4px;
         }
 
-        @media (max-width: 600px) {
-            .main-statement { font-size: clamp(1.6rem, 7vw, 2.4rem); }
-        }
     </style>
 </head>
 <body>
@@ -262,16 +207,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Background video -->
-    <video class="bg-video" autoplay muted loop playsinline poster="">
-        <source src="/hero.mp4" type="video/mp4">
+    <!-- Full-viewport video player -->
+    <video class="player" controls autoplay playsinline preload="auto">
+        <source src="/shedances-schober.mp4" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
-    <div class="bg-overlay"></div>
-
-    <!-- Centered typewriter text -->
-    <div class="fullscreen">
-        <p class="main-statement" id="typed-text"></p>
-    </div>
 
     <!-- Versions dropdown fixed to bottom-right -->
     <details class="versions-btn">
@@ -286,28 +226,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </details>
 
     <script>
+        // Autoplay with sound is blocked by browsers; fall back to muted autoplay if needed.
         (function () {
-            const el = document.getElementById('typed-text');
-            const text = 'Evidence Suggests that INTJ Personalities BEST Understand AI!';
-            const cursor = document.createElement('span');
-            cursor.className = 'cursor';
-            el.appendChild(cursor);
-
-            let i = 0;
-            const speed = 55; // ms per character
-
-            function type() {
-                if (i < text.length) {
-                    el.insertBefore(document.createTextNode(text[i]), cursor);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    cursor.classList.add('done');
-                }
-            }
-
-            // Start after a brief pause so the video has a moment to render
-            setTimeout(type, 600);
+            const video = document.querySelector('.player');
+            if (!video) return;
+            video.play().catch(() => {
+                video.muted = true;
+                video.play().catch(() => {});
+            });
         })();
     </script>
 
