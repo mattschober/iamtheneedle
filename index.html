@@ -111,16 +111,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         html, body {
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             color: white;
-            overflow: hidden;
         }
 
+        /* ── Background video ── */
+        .bg-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Dark overlay so text is always legible */
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        /* ── Centered text layer ── */
         .fullscreen {
+            position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -136,15 +157,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             line-height: 1.25;
             letter-spacing: -0.02em;
             max-width: 900px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 30px rgba(0,0,0,0.6);
         }
 
-        .main-statement em {
-            font-style: normal;
-            opacity: 0.85;
+        /* Blinking cursor appended while typing */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: white;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: blink 0.75s step-end infinite;
         }
 
-        /* Versions button fixed to bottom-right */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
+        }
+
+        /* Cursor stops blinking and fades out after typing finishes */
+        .cursor.done {
+            animation: none;
+            opacity: 0;
+            transition: opacity 0.8s ease 1.5s;
+        }
+
+        /* ── Versions button fixed to bottom-right ── */
         .versions-btn {
             position: fixed;
             bottom: 20px;
@@ -158,7 +197,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-weight: 500;
             cursor: pointer;
             backdrop-filter: blur(8px);
-            z-index: 100;
+            z-index: 10;
         }
 
         .versions-btn summary {
@@ -177,19 +216,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             opacity: 0.7;
         }
 
-        .versions-btn[open] summary::after {
-            content: '▴';
-        }
+        .versions-btn[open] summary::after { content: '▴'; }
 
         .versions-menu {
             position: absolute;
             bottom: calc(100% + 8px);
             right: 0;
-            background: rgba(30,20,50,0.92);
+            background: rgba(20,10,40,0.92);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 6px;
             padding: 8px 0;
-            min-width: 200px;
+            min-width: 210px;
             backdrop-filter: blur(12px);
         }
 
@@ -202,9 +239,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             white-space: nowrap;
         }
 
-        .versions-menu a:hover {
-            background: rgba(255,255,255,0.1);
-        }
+        .versions-menu a:hover { background: rgba(255,255,255,0.1); }
 
         .versions-menu .menu-label {
             padding: 4px 16px 8px;
@@ -217,9 +252,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
 
         @media (max-width: 600px) {
-            .main-statement {
-                font-size: clamp(1.6rem, 7vw, 2.4rem);
-            }
+            .main-statement { font-size: clamp(1.6rem, 7vw, 2.4rem); }
         }
     </style>
 </head>
@@ -229,11 +262,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+    <!-- Background video -->
+    <video class="bg-video" autoplay muted loop playsinline poster="">
+        <source src="/hero.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
+
+    <!-- Centered typewriter text -->
     <div class="fullscreen">
-        <p class="main-statement">Evidence Suggests that INTJ Personalities BEST Understand AI!</p>
+        <p class="main-statement" id="typed-text"></p>
     </div>
 
-    <!-- Versions dropdown button fixed to bottom-right -->
+    <!-- Versions dropdown fixed to bottom-right -->
     <details class="versions-btn">
         <summary>Versions</summary>
         <div class="versions-menu">
@@ -244,6 +284,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="/open-collaboration.html">Open Collaboration Framework</a>
         </div>
     </details>
+
+    <script>
+        (function () {
+            const el = document.getElementById('typed-text');
+            const text = 'Evidence Suggests that INTJ Personalities BEST Understand AI!';
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            el.appendChild(cursor);
+
+            let i = 0;
+            const speed = 55; // ms per character
+
+            function type() {
+                if (i < text.length) {
+                    el.insertBefore(document.createTextNode(text[i]), cursor);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    cursor.classList.add('done');
+                }
+            }
+
+            // Start after a brief pause so the video has a moment to render
+            setTimeout(type, 600);
+        })();
+    </script>
 
 </body>
 </html>
