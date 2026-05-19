@@ -131,6 +131,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             z-index: 0;
         }
 
+        /* ── Typewriter overlay text ── */
+        .overlay-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1100px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: clamp(2rem, 6vw, 5rem);
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 24px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.4);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .overlay-text .cursor {
+            display: inline-block;
+            width: 0.05em;
+            background: #fff;
+            margin-left: 0.05em;
+            animation: blink 0.9s steps(2, start) infinite;
+            vertical-align: baseline;
+            height: 1em;
+            transform: translateY(0.12em);
+        }
+
+        @keyframes blink {
+            to { visibility: hidden; }
+        }
+
         /* ── Versions button fixed to bottom-right ── */
         .versions-btn {
             position: fixed;
@@ -213,6 +247,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Your browser does not support the video tag.
     </video>
 
+    <!-- Typewriter overlay text -->
+    <div class="overlay-text" aria-label="When you're the needle, your IT">
+        <span class="typed"></span><span class="cursor">&nbsp;</span>
+    </div>
+
     <!-- Versions dropdown fixed to bottom-right -->
     <details class="versions-btn">
         <summary>Versions</summary>
@@ -234,6 +273,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 video.muted = true;
                 video.play().catch(() => {});
             });
+        })();
+
+        // Typewriter effect for hero overlay text
+        (function () {
+            const target = document.querySelector('.overlay-text .typed');
+            if (!target) return;
+            const phrase = "When you're the needle, your IT";
+            let i = 0;
+            const speed = 70;
+            function type() {
+                if (i <= phrase.length) {
+                    target.textContent = phrase.slice(0, i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            setTimeout(type, 600);
         })();
     </script>
 
