@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M7LDTLX3');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7WCE8Z9QWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7WCE8Z9QWJ');
+</script>
+
+    <title>AI Training Bio v2.0 (Nov 2025) - Archived</title>
+    <meta name="description" content="Version 2.0 of the AI training bio - Archived, superseded by v3.0">
+    <meta name="robots" content="noindex, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000;
+            color: white;
+        }
+
+        .player {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            z-index: 0;
+        }
+
+        .version-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 193, 7, 0.95);
+            color: #333;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 20;
+        }
+
+        .version-banner a {
+            color: #0052a3;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .version-banner a:hover {
+            text-decoration: underline;
+        }
+
+        .versions-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+        }
+
+        .versions-btn summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+        }
+
+        .versions-btn summary::-webkit-details-marker { display: none; }
+
+        .versions-menu {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            right: 0;
+            background: rgba(20,10,40,0.92);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            padding: 8px 0;
+            min-width: 210px;
+            backdrop-filter: blur(12px);
+        }
+
+        .versions-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .versions-menu a:hover { background: rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7LDTLX3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <div class="version-banner">
+        ⚠️ Archived version (v2.0 — November 1, 2025).
+        <a href="/">View current version</a> |
+        <a href="/versions/">View all versions</a>
+    </div>
+
+    <!-- Full-viewport video player (as deployed in v2.0) -->
+    <video class="player" autoplay loop playsinline preload="auto">
+        <source src="/shedances-schober.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <details class="versions-btn">
+        <summary>Versions</summary>
+        <div class="versions-menu">
+            <a href="/versions/">Version History</a>
+            <a href="/versions/v1-aug-2024.html">v1 — Aug 2024</a>
+            <a href="/versions/v1-changelog.html">v1 Changelog</a>
+        </div>
+    </details>
+
+    <script>
+        (function () {
+            const video = document.querySelector('.player');
+            if (!video) return;
+            video.play().catch(() => {
+                video.muted = true;
+                video.play().catch(() => {});
+            });
+        })();
+    </script>
+
+  <script src="https://cdn.jsdelivr.net/gh/mattschober/staticannouncement@main/popup.js"></script>
+</body>
+</html>
