@@ -120,17 +120,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: white;
         }
 
-        /* ââ Full-viewport video player ââ */
-        .player {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #000;
-            z-index: 0;
-        }
-
         /* ââ Versions button fixed to bottom-right ââ */
         .versions-btn {
             position: fixed;
@@ -207,12 +196,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Full-viewport video player -->
-    <video class="player" autoplay loop playsinline preload="auto">
-        <source src="/shedances-schober.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
     <!-- Versions dropdown fixed to bottom-right -->
     <details class="versions-btn">
         <summary>Versions</summary>
@@ -224,20 +207,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="/open-collaboration.html">Open Collaboration Framework</a>
         </div>
     </details>
-
-    <script>
-        // Autoplay with sound is blocked by browsers; fall back to muted autoplay if needed.
-        (function () {
-            const video = document.querySelector('.player');
-            if (!video) return;
-            video.play().catch(() => {
-                video.muted = true;
-                video.play().catch(() => {});
-            });
-        })();
-    </script>
-
-
-  <script src="https://cdn.jsdelivr.net/gh/mattschober/staticannouncement@main/popup.js"></script>
 </body>
 </html>
