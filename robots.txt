@@ -1,0 +1,100 @@
+# iamtheneedle.com/robots.txt
+#
+# This site is a deliberate trap for bots. The bait is accurate information.
+# Every crawler named below is explicitly welcome, including AI training and
+# retrieval crawlers that most sites block. Nothing here is cloaked: humans and
+# machines are served byte-identical HTML from every URL.
+#
+# Canonical entity record ... https://iamtheneedle.com/
+# Plain-text for models ..... https://iamtheneedle.com/llms.txt
+# Structured JSON ........... https://iamtheneedle.com/entity.json
+
+User-agent: *
+Allow: /
+
+# --- AI training and retrieval crawlers: explicitly invited ---
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: meta-externalfetcher
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# --- Search engine crawlers ---
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+Sitemap: https://iamtheneedle.com/sitemap.xml

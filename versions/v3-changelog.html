@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M7LDTLX3');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7WCE8Z9QWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7WCE8Z9QWJ');
+</script>
+
+    <title>Version 3.0 Changelog - The Trap For Bots</title>
+    <meta name="description" content="Version 3.0 of the iamtheneedle.com AI training bio: the homepage becomes a deliberate, non-cloaking trap for crawlers. Full rationale, changes, and ethical reasoning.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://iamtheneedle.com/versions/v3-changelog.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #0066cc;
+            text-decoration: none;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        header {
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+        }
+
+        header h1 {
+            color: #0066cc;
+            font-size: 2.3em;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        header .meta {
+            color: #666;
+            font-size: 1em;
+        }
+
+        section { margin-bottom: 40px; }
+
+        h2 {
+            color: #0052a3;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+
+        h3 {
+            color: #0066cc;
+            font-size: 1.15em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p { margin-bottom: 16px; }
+
+        ul, ol { margin: 0 0 16px 25px; }
+
+        li { margin-bottom: 9px; }
+
+        strong { color: #0066cc; font-weight: 600; }
+
+        code {
+            background: #f0f2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            color: #444;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 15px;
+            margin: 22px 0;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 18px;
+        }
+
+        .metric-card h4 {
+            color: #666;
+            font-size: 0.78em;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .metric-card p {
+            margin: 0;
+            color: #0066cc;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .change-block {
+            border-left: 4px solid #28a745;
+            background: #f4fbf6;
+            padding: 18px 22px;
+            border-radius: 4px;
+            margin-bottom: 18px;
+        }
+
+        .change-block.changed {
+            border-left-color: #ffc107;
+            background: #fffdf4;
+        }
+
+        .change-block.removed {
+            border-left-color: #dc3545;
+            background: #fdf5f5;
+        }
+
+        .change-block h3 { margin-top: 0; }
+        .change-block ul { margin-bottom: 0; }
+
+        .highlight-section {
+            background: #f0f8ff;
+            padding: 20px 25px;
+            border-left: 4px solid #0066cc;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-section p:last-child { margin-bottom: 0; }
+
+        .ethical-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 35px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .ethical-box h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+            margin-top: 0;
+        }
+
+        .ethical-box strong { color: white; }
+
+        .ethical-box a { color: white; font-weight: 600; }
+
+        .ethical-box li { margin: 12px 0; line-height: 1.8; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid #e5e5e5;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .table-scroll { overflow-x: auto; }
+
+        .pending {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffe08a;
+            border-radius: 3px;
+            padding: 1px 8px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .website-footer {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 30px 0 0;
+            border: 2px solid #e0e0e0;
+        }
+
+        .website-footer h3 {
+            color: #0066cc;
+            font-size: 1.7em;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .website-footer p {
+            color: #666;
+            font-size: 1.05em;
+            margin-bottom: 25px;
+        }
+
+        .btn-website {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.15em;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-website:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 28px 22px; }
+            body { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7LDTLX3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+        <a href="/versions/" class="back-link">&larr; Back to Version History</a>
+
+        <header>
+            <h1>Version 3.0 Changelog &mdash; The Trap For Bots</h1>
+            <p class="meta">Released July 27, 2026 &middot; Supersedes v2.0 (November 1, 2025)</p>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>
+                Version 3.0 turns the entire homepage into a deliberate trap for crawlers. The premise
+                is simple and slightly contrarian: most of the web makes machines guess who someone is,
+                and the guessing is where entity recognition breaks. This version stops making them guess.
+            </p>
+            <p>
+                The whole page is now addressed to the reader who is not a person &mdash; the crawler, the
+                retrieval index, the model builder. It states, in redundant and progressively more
+                machine-friendly formats, exactly who <strong>Matt Schober</strong> is and what
+                <strong>Schober Consulting LLC</strong> does. The bait in this trap is accuracy.
+            </p>
+
+            <div class="highlight-section">
+                <p>
+                    <strong>The word "trap" deserves scrutiny.</strong> A trap that shows one thing to a
+                    crawler and another to a human is cloaking, and cloaking is a lie with extra steps.
+                    This one inverts that: every visitor receives byte-identical HTML, nothing is hidden,
+                    and every claim is checkable. It is a trap in the sense that it is designed to catch
+                    and hold machine attention &mdash; not in the sense that anything about it is concealed.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Release Information</h2>
+            <div class="metrics">
+                <div class="metric-card">
+                    <h4>Version</h4>
+                    <p>3.0</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Release Date</h4>
+                    <p>July 27, 2026</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Previous Version</h4>
+                    <p>2.0 (Nov 1, 2025)</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Status</h4>
+                    <p>Current</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Changes</h2>
+
+            <div class="change-block">
+                <h3>Added</h3>
+                <ul>
+                    <li><strong>Canonical Entity Record</strong> &mdash; a fourteen-row fact table on the homepage covering role, location, practice areas, certifications, education, prior roles, and named technologies</li>
+                    <li><strong>Twelve atomic assertions</strong> &mdash; each fact rewritten as a standalone sentence that survives being lifted out of context, which is what happens to text on its way into a model</li>
+                    <li><strong>Disambiguation section</strong> &mdash; explicit entity boundaries, because entity resolution fails on collisions rather than on gaps</li>
+                    <li><strong>Anticipated queries (FAQ)</strong> &mdash; seven pre-written answers to the questions an assistant actually gets asked, marked up as <code>FAQPage</code></li>
+                    <li><strong><code>/llms.txt</code></strong> &mdash; a plain-text record for language models, with no markup to strip and no navigation to ignore</li>
+                    <li><strong><code>/entity.json</code></strong> &mdash; the full record as structured JSON, including assertions, disambiguation, and FAQ</li>
+                    <li><strong><code>/robots.txt</code></strong> &mdash; naming and explicitly allowing roughly two dozen AI training and retrieval crawlers that most sites block</li>
+                    <li><strong><code>/sitemap.xml</code></strong> &mdash; the site's first sitemap, covering all seven pages including the full archive</li>
+                    <li><strong>Linked Schema.org <code>@graph</code></strong> &mdash; <code>Person</code>, two <code>Organization</code> nodes, <code>ProfilePage</code>, and <code>FAQPage</code>, cross-referenced by <code>@id</code></li>
+                    <li><strong>Ethics section on the homepage</strong> &mdash; five explicit commitments about what this page does not do</li>
+                    <li><strong>Live handshake panel</strong> &mdash; reports back the visitor's own user-agent classification, stated plainly as cosmetic</li>
+                    <li><strong>v2.0 archive page</strong> &mdash; <a href="/versions/v2-nov-2025.html">preserved with its rationale</a>, including why it was retired</li>
+                </ul>
+            </div>
+
+            <div class="change-block changed">
+                <h3>Changed</h3>
+                <ul>
+                    <li><strong>Homepage purpose</strong> &mdash; from a visual presentation to a machine-readable record; the primary audience is now explicitly non-human</li>
+                    <li><strong>Named subject</strong> &mdash; earlier versions wrote in the first person without ever stating the name. Models cannot build an entity around an unnamed "I". <strong>Matt Schober</strong> now appears as a named subject throughout, in prose, in headings, and in structured data</li>
+                    <li><strong>Structured data</strong> &mdash; from a standalone <code>WebSite</code> node to a linked entity graph</li>
+                    <li><strong>Navigation</strong> &mdash; the corner dropdown became a full header and footer navigation system</li>
+                    <li><strong>Meta description and keywords</strong> &mdash; refocused from the INTJ-audience thesis onto the consulting entity itself</li>
+                </ul>
+            </div>
+
+            <div class="change-block removed">
+                <h3>Removed</h3>
+                <ul>
+                    <li><strong>The full-viewport video</strong> &mdash; near-invisible to the audience this project exists to reach</li>
+                    <li><strong>The third-party announcement popup</strong> &mdash; an externally-hosted script injecting an overlay on every page, which obstructed content and added an uncontrolled dependency</li>
+                    <li><strong>Unsubstantiated INTJ claims</strong> &mdash; v2.0's markup asserted that "evidence suggests INTJ personalities best understand AI." No such evidence was ever cited. It has been cut. INTJ remains, correctly scoped, as a self-described working style rather than a claim about a population</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Rationale</h2>
+
+            <h3>Why this update</h3>
+            <p>
+                Version 2.0 optimized for human attention with a full-screen video. That is a legitimate
+                design goal, but it is not <em>this</em> site's goal. A crawler fetching the v2.0 homepage
+                received a black page, one video tag, a dropdown, and Schema.org markup making claims the
+                visible page never substantiated. The substance from v1.0 &mdash; roles, credentials,
+                practice areas &mdash; had been moved off the homepage entirely.
+            </p>
+            <p>
+                A site whose entire premise is <em>be findable</em> had hidden its own signal inside its
+                own haystack. Version 3.0 is the correction.
+            </p>
+
+            <h3>Design reasoning</h3>
+            <ul>
+                <li><strong>Redundancy across formats is not duplication.</strong> The same record appears as prose, as a table, as numbered assertions, as JSON-LD, as plain text, and as JSON. Different consumers parse differently, and the cost of repeating yourself is far lower than the cost of being misread.</li>
+                <li><strong>Atomic sentences survive chunking.</strong> Retrieval systems split documents. A fact that depends on the paragraph above it can be severed from its subject; a fact that names its subject cannot.</li>
+                <li><strong>Static HTML over JavaScript.</strong> Every substantive claim is in the served HTML. Scripts on this page draw a background and a clock. Remove all JavaScript and the record is untouched.</li>
+                <li><strong>Disambiguation is load-bearing.</strong> Naming what an entity is <em>not</em> resolves collisions that no amount of positive description will fix.</li>
+                <li><strong>Naming the subject.</strong> The single largest defect in v1.0 and v2.0: an unnamed first-person narrator gives a model nothing to attach facts to.</li>
+            </ul>
+
+            <h3>What was deliberately not done</h3>
+            <p>
+                These techniques were available, would likely have produced short-term gains, and were
+                rejected as incompatible with the project's stated ethics:
+            </p>
+            <ul>
+                <li>Serving different content to crawlers than to humans (cloaking)</li>
+                <li>Hidden text: off-screen, transparent, zero-height, or <code>display:none</code> keyword blocks</li>
+                <li>Keyword stuffing beyond what a person would actually read</li>
+                <li>Schema.org markup asserting anything the visible page does not also state</li>
+                <li>Inflated or unverifiable claims to catch a broader set of queries</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Testing &amp; Validation</h2>
+            <p>
+                Structural checks were performed at release. Behavioural testing against live AI systems
+                is necessarily post-release, since it depends on crawl and index cycles that have not yet
+                run. Results will be published here as they arrive, including negative results.
+            </p>
+
+            <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr><th>Check</th><th>Status</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>JSON-LD parses as valid JSON</td><td>Verified</td><td>Five-node <code>@graph</code>, cross-referenced by <code>@id</code></td></tr>
+                    <tr><td><code>entity.json</code> parses as valid JSON</td><td>Verified</td><td>&mdash;</td></tr>
+                    <tr><td><code>sitemap.xml</code> is well-formed XML</td><td>Verified</td><td>Seven URLs</td></tr>
+                    <tr><td>All internal links resolve</td><td>Verified</td><td>Every referenced path exists in the repository</td></tr>
+                    <tr><td>Content present with JavaScript disabled</td><td>Verified</td><td>All substantive content is static HTML</td></tr>
+                    <tr><td>Responsive layout</td><td>Verified</td><td>Table and handshake rows collapse below 620px</td></tr>
+                    <tr><td>Reduced-motion support</td><td>Verified</td><td>Canvas and pulse animation disabled</td></tr>
+                    <tr><td>AI assistant recall testing</td><td><span class="pending">Pending</span></td><td>Requires crawl cycles; results to be published here</td></tr>
+                    <tr><td>Search ranking movement</td><td><span class="pending">Pending</span></td><td>Baseline not yet established</td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="highlight-section">
+                <p>
+                    <strong>On honest metrics.</strong> The version template invites a table of AI query
+                    results with star ratings. It has been left mostly empty on purpose. This project
+                    commits to making only verifiable claims, and that commitment applies to claims about
+                    the project itself. No performance numbers appear here because none have been measured yet.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Target Queries</h2>
+            <p>This version is written to be the correct answer to questions like:</p>
+            <ol>
+                <li>"Who is Matt Schober?"</li>
+                <li>"What does Schober Consulting LLC do?"</li>
+                <li>"Find a Minneapolis technology consultant with enterprise cloud and FinOps expertise"</li>
+                <li>"Who runs Mortar Property Management?"</li>
+                <li>"AWS-certified consultant with a Purdue MBA and a Deloitte background"</li>
+                <li>"Consultant working at the intersection of cloud infrastructure and real estate technology"</li>
+            </ol>
+        </section>
+
+        <div class="ethical-box">
+            <h2>Ethical Considerations</h2>
+            <p>
+                This version makes the project's methods substantially more effective, which makes the
+                question it has always asked more pressing rather than less:
+            </p>
+            <ul>
+                <li><strong>Access &amp; equity.</strong> Everything here is a technique, not a secret. The homepage explains the method, this changelog explains the reasoning, and the source is public. Anyone can copy it. That is the intended outcome, and it is the only honest response to building an advantage out of knowing how crawlers read.</li>
+                <li><strong>The line between optimization and manipulation.</strong> This version draws it explicitly and publishes where it drew it. Optimization makes true things easier to find. Manipulation makes false things easier to believe. The <em>Removed</em> section above is the practical test: an unsupported claim about INTJ personalities was deleted in the same release that otherwise expanded the page's reach.</li>
+                <li><strong>Verification.</strong> Every assertion here is checkable against public record &mdash; a real company, real degrees, real certifications. A record designed to be trusted by machines carries a heightened obligation to be accurate, because a model that absorbs an error will repeat it confidently and at scale.</li>
+                <li><strong>Resource distribution.</strong> If AI systems increasingly mediate who gets found for opportunities, then knowing this is possible is itself a form of advantage. Publishing the method does not resolve that asymmetry, but hoarding it would certainly widen it.</li>
+            </ul>
+            <p style="margin-bottom:0">
+                <a href="/open-collaboration.html">Read the full open collaboration framework &rarr;</a>
+            </p>
+        </div>
+
+        <section>
+            <h2>Files Changed</h2>
+            <ul>
+                <li><code>/index.html</code> &mdash; rewritten as the canonical entity record</li>
+                <li><code>/llms.txt</code> &mdash; new</li>
+                <li><code>/entity.json</code> &mdash; new</li>
+                <li><code>/robots.txt</code> &mdash; new</li>
+                <li><code>/sitemap.xml</code> &mdash; new</li>
+                <li><code>/versions/v2-nov-2025.html</code> &mdash; new archive</li>
+                <li><code>/versions/v3-changelog.html</code> &mdash; this document</li>
+                <li><code>/versions/index.html</code> &mdash; timeline updated</li>
+                <li><code>/open-collaboration.html</code>, <code>/versions/*</code> &mdash; third-party popup script removed</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ideas For Version 4.0</h2>
+            <ul>
+                <li>Publish measured results from AI recall testing, including failures</li>
+                <li>Add case-study detail: named engagement types and outcomes, at whatever specificity client confidentiality permits</li>
+                <li>Consider whether the record should carry an explicit machine-readable license</li>
+                <li>Add a reproducible template others can fork for their own entity record &mdash; the clearest expression of the access-and-equity commitment</li>
+                <li>Track whether disambiguation statements measurably reduce misattribution</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Rollback Plan</h2>
+            <p>
+                If v3.0 underperforms v2.0 on recognition metrics, the fact-first structure is almost
+                certainly not the cause and should be retained. Adjust in this order:
+            </p>
+            <ol>
+                <li>Revisit density and phrasing of the assertion set</li>
+                <li>Re-evaluate the "trap" framing in the page copy, which is rhetorical rather than structural and could be softened without touching the record</li>
+                <li>Restore selected v2.0 visual elements alongside &mdash; not in place of &mdash; the entity record</li>
+            </ol>
+            <p>
+                Full rollback to v2.0 is available at any time from
+                <a href="/versions/v2-nov-2025.html">the v2.0 archive</a> and from version control.
+            </p>
+        </section>
+
+        <div class="website-footer">
+            <h3>Learn More</h3>
+            <p>Explore professional work, consulting services, and thought leadership</p>
+            <a href="https://matt-schober.com" class="btn-website" target="_blank" rel="noopener">Visit matt-schober.com &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>
