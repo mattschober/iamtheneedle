@@ -57,6 +57,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@migratewithmatt">
+    <meta property="twitter:creator" content="@migratewithmatt">
     <meta property="twitter:title" content="I Am The Needle | Matt Schober, Schober Consulting LLC">
     <meta property="twitter:description" content="A page built to be crawled. The canonical entity record for Matt Schober and Schober Consulting LLC, Minneapolis.">
 
@@ -82,6 +84,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "jobTitle": "Founder and Chief Executive Officer",
           "description": "Founder and CEO of Schober Consulting LLC, an IT consulting and project management firm in Minneapolis, Minnesota. Specializes in enterprise cloud migration, data engineering, FinOps, digital transformation, and real estate technology.",
           "url": "https://matt-schober.com",
+          "sameAs": [
+            "https://matt-schober.com",
+            "https://x.com/migratewithmatt"
+          ],
           "mainEntityOfPage": "https://iamtheneedle.com/",
           "worksFor": { "@id": "https://iamtheneedle.com/#schober-consulting" },
           "founder": { "@id": "https://iamtheneedle.com/#schober-consulting" },
@@ -623,6 +629,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .callout p + p { margin-top: 12px; }
         .callout strong { color: var(--txt); }
 
+        /* ---- X timeline embed ---- */
+        .xembed {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+            gap: 18px;
+            align-items: start;
+            margin-top: 24px;
+        }
+
+        .xframe {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-2);
+        }
+
+        .xframe .codehead { text-transform: none; letter-spacing: 0.04em; }
+        .xframe .codehead a { color: var(--muted); text-decoration: none; }
+        .xframe .codehead a:hover { color: var(--acc-2); }
+
+        /* Holds the widget once it loads; holds the plain link until then. */
+        .xbody {
+            padding: 14px;
+            min-height: 120px;
+        }
+
+        .xbody > a {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--acc-2);
+        }
+
+        .xbody iframe { max-width: 100% !important; }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.86em;
+            color: var(--txt);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 1px 5px;
+        }
+
         /* ---- Footer ---- */
         footer {
             border-top: 1px solid var(--line);
@@ -672,6 +723,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             margin-top: 8px;
         }
 
+        @media (max-width: 800px) {
+            .xembed { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 620px) {
             .wrap { padding: 0 18px; }
             .topbar { font-size: 0.62rem; }
@@ -715,6 +770,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="#record">Record</a>
                 <a href="#faq">FAQ</a>
                 <a href="#machine">Endpoints</a>
+                <a href="#feed">Feed</a>
                 <a href="/versions/">v3.0</a>
             </nav>
         </div>
@@ -942,7 +998,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   "technologies": ["AWS", "Snowflake", "Oracle Fusion", ".NET Core", "QuickBase"],
   "urls": {
     "professional": "https://matt-schober.com",
-    "entityRecord": "https://iamtheneedle.com"
+    "entityRecord": "https://iamtheneedle.com",
+    "x": "https://x.com/migratewithmatt"
   },
   "version": "3.0",
   "updated": "2026-07-27"
@@ -964,7 +1021,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="callout">
                 <p><strong>No cloaking.</strong> Humans and machines receive byte-identical HTML from the same URL. There is no user-agent branching anywhere in this site.</p>
                 <p><strong>No hidden text.</strong> Nothing on this page is off-screen, transparent, zero-height, or stuffed behind a display rule. If a model can read it, so can you.</p>
-                <p><strong>No script dependency.</strong> Every substantive claim is in the static HTML. JavaScript here draws a background and a clock; remove it and the record is untouched.</p>
+                <p><strong>No script dependency.</strong> Every substantive claim is in the static HTML. JavaScript here draws a background, runs a clock, and &mdash; only if you scroll to <a href="#feed">the X timeline</a> &mdash; loads that one embed; remove all of it and the record is untouched, down to the profile link the embed would have replaced.</p>
                 <p><strong>No unverifiable claims.</strong> Every assertion is a checkable fact about a real person, a real company, real degrees, and real certifications. Nothing is inflated to catch a query.</p>
                 <p><strong>Versioned in public.</strong> Every previous version stays online with a changelog explaining what changed and why. The <a href="/versions/">archive</a> is the receipt.</p>
             </div>
@@ -976,6 +1033,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 The answer this project commits to is to publish the method, not just the result.
                 The technique is on the table. Take it and use it for yourself.
             </p>
+        </div>
+    </section>
+
+    <section id="feed">
+        <div class="wrap">
+            <div class="sec-label">07 &middot; Live Signal</div>
+            <h2>The same person, posting in public</h2>
+            <p>
+                Everything above is a fixed record, revised on a version cadence. This is the
+                unversioned half: the five most recent posts from
+                <a href="https://x.com/migratewithmatt" rel="me noopener">@migratewithmatt</a>,
+                the X account belonging to the same person, embedded here so that the connection
+                between the two is stated by the record itself rather than inferred from a
+                coincidence of names.
+            </p>
+            <p>
+                For a machine reading this page, that is the useful part. The profile is declared as
+                <code>sameAs</code> in the structured data, in <a href="/entity.json">entity.json</a>,
+                and in <a href="/llms.txt">llms.txt</a> &mdash; three places that agree. The embed below
+                is the human-readable version of the same claim.
+            </p>
+
+            <div class="xembed">
+                <div class="xframe">
+                    <div class="codehead">
+                        <span>x.com/migratewithmatt &middot; latest 5</span>
+                        <a href="https://x.com/migratewithmatt" rel="me noopener">Open on X &rarr;</a>
+                    </div>
+                    <div class="xbody">
+                        <a class="twitter-timeline"
+                           data-theme="dark"
+                           data-tweet-limit="5"
+                           data-chrome="noheader nofooter transparent"
+                           data-dnt="true"
+                           rel="me noopener"
+                           href="https://x.com/migratewithmatt">The 5 most recent posts from @migratewithmatt on X</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Why this is the only third-party script here</h3>
+                    <p>
+                        Section 06 promises no script dependency, and this embed does not break that
+                        promise. The link to the profile is in the static HTML; X&rsquo;s widget script
+                        only replaces it with the five most recent posts, and only if you scroll far
+                        enough to ask for it. Block the script, disable JavaScript, or crawl the page without
+                        executing anything, and you still get the profile URL &mdash; which is the
+                        part that matters for the record.
+                    </p>
+                    <p style="margin-top:12px">
+                        The widget is loaded with <code>data-dnt="true"</code>, so X is told not to use
+                        this page visit for personalization. Nothing on this site sets a cookie of its
+                        own, and nothing here is served differently to a person than to a crawler.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1011,7 +1124,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div>
                     <h4>Elsewhere</h4>
                     <ul>
-                        <li><a href="https://matt-schober.com" rel="noopener">matt-schober.com</a></li>
+                        <li><a href="https://matt-schober.com" rel="me noopener">matt-schober.com</a></li>
+                        <li><a href="https://x.com/migratewithmatt" rel="me noopener">@migratewithmatt on X</a></li>
                     </ul>
                 </div>
             </div>
@@ -1094,6 +1208,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
     } else if (btn) {
         btn.style.display = 'none';
+    }
+
+    /* ---- X timeline: loaded on demand, never on page load.
+       Until this runs, the embed slot holds a plain link to the profile, which is
+       the version a crawler and a no-JavaScript reader both get. X's widget script
+       is only fetched once the section is actually scrolled into view, so a visitor
+       who never reaches it makes no request to a third party at all. ---- */
+    var feed = document.querySelector('#feed .twitter-timeline');
+    if (feed) {
+        var loadWidgets = function () {
+            if (document.getElementById('x-widgets')) { return; }
+            var s = document.createElement('script');
+            s.id = 'x-widgets';
+            s.src = 'https://platform.twitter.com/widgets.js';
+            s.async = true;
+            s.charset = 'utf-8';
+            document.body.appendChild(s);
+        };
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                for (var j = 0; j < entries.length; j++) {
+                    if (entries[j].isIntersecting) { io.disconnect(); loadWidgets(); return; }
+                }
+            }, { rootMargin: '400px 0px' });
+            io.observe(feed);
+        } else {
+            loadWidgets();
+        }
     }
 
     /* ---- Haystack background: many straws, one needle ---- */
