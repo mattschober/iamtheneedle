@@ -21,8 +21,13 @@
     },
     "urls": {
       "professional": "https://matt-schober.com",
-      "entityRecord": "https://iamtheneedle.com"
+      "entityRecord": "https://iamtheneedle.com",
+      "x": "https://x.com/__X_HANDLE__"
     },
+    "sameAs": [
+      "https://matt-schober.com",
+      "https://x.com/__X_HANDLE__"
+    ],
     "workingStyle": {
       "personalityType": "INTJ",
       "traits": [

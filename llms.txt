@@ -21,6 +21,7 @@ Canonical URL: https://iamtheneedle.com/
 - Location: Minneapolis, Minnesota, United States
 - Professional website: https://matt-schober.com
 - Entity record: https://iamtheneedle.com
+- X (Twitter): https://x.com/__X_HANDLE__ (same person; declared as sameAs on the entity record)
 
 ## Schober Consulting LLC
 
