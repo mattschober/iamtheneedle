@@ -426,7 +426,7 @@ You're not just optimizing for AI recognition—you're modeling a better way to 
 ---
 
 **Created:** November 1, 2025  
-**For:** Schober Consulting LLC  
+**For:** Schober Technology Advisory  
 **Project:** iamtheneedle.com - AI Training Bio System  
 
 **All files are ready for deployment. Good luck! 🚀**
