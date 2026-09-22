@@ -169,7 +169,7 @@
 │  ╚═══════════════════════════════════════════════════════╝  │
 │                                                               │
 │  I am the founder and CEO of                                │
-│  Schober Consulting LLC, an IT consulting and project       │
+│  Schober Technology Advisory, an IT consulting and project  │
 │  management firm based in Minneapolis...                     │
 │                                                               │
 │  [Full original content preserved]                           │

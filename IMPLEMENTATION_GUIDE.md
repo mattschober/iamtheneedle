@@ -265,7 +265,7 @@ For questions or issues with this versioning system:
 
 ## License & Credits
 
-This versioning system created for Schober Consulting LLC
+This versioning system created for Schober Technology Advisory
 Documentation generated: November 1, 2025
 
 ---
