@@ -22,13 +22,19 @@ permissions:
 
 jobs:
   refresh:
-    runs-on: ubuntu-latest
+    # Pinned rather than ubuntu-latest: that label migrates to Ubuntu 26 starting
+    # 2026-10-19, and a nightly job that nobody watches should not change OS under
+    # itself. Bump this deliberately once Ubuntu 26 images have settled.
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      # v5 of both actions runs on the Node 24 action runtime. Node 20 was removed
+      # from the runners in September 2026, so v4 only survives by being forced
+      # onto Node 24 anyway, with a deprecation warning on every run.
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Fetch posts and rewrite index.html
         env:
