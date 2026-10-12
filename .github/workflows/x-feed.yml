@@ -8,8 +8,9 @@ name: Refresh X feed
 
 on:
   schedule:
-    # Every six hours, a few minutes off the hour to avoid the scheduler's busiest slots.
-    - cron: '17 */6 * * *'
+    # Nightly. 08:47 UTC is 03:47 in Minneapolis on CDT, 02:47 on CST -- the middle
+    # of the night either way. Off the hour, since GitHub's scheduler is busiest there.
+    - cron: '47 8 * * *'
   workflow_dispatch:
 
 concurrency:

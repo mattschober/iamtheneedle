@@ -10,8 +10,9 @@ Freshness happens before the page is served.
 
 ## How it refreshes
 
-`.github/workflows/x-feed.yml` runs every six hours (and on demand from the Actions
-tab). It calls `scripts/fetch-x-posts.mjs`, which:
+`.github/workflows/x-feed.yml` runs nightly at 08:47 UTC — 03:47 in Minneapolis on
+CDT, 02:47 on CST — and on demand from the Actions tab. It calls
+`scripts/fetch-x-posts.mjs`, which:
 
 1. reads the account's timeline from the X API v2,
 2. writes `posts.json` at the repository root,
