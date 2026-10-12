@@ -1,0 +1,51 @@
+# Writes the latest posts from @migratewithmatt into index.html and commits the result.
+#
+# Credentials come from repository secrets: X_BEARER_TOKEN if it is set, otherwise
+# X_CONSUMER_KEY and X_SECRET_KEY, which the job exchanges for an app-only bearer
+# token at run time. With neither, the job fails loudly rather than publishing a
+# stale or empty feed.
+name: Refresh X feed
+
+on:
+  schedule:
+    # Every six hours, a few minutes off the hour to avoid the scheduler's busiest slots.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: x-feed
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch posts and rewrite index.html
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          X_CONSUMER_KEY: ${{ secrets.X_CONSUMER_KEY }}
+          X_SECRET_KEY: ${{ secrets.X_SECRET_KEY }}
+          X_USERNAME: migratewithmatt
+          X_POST_COUNT: '10'
+        run: node scripts/fetch-x-posts.mjs
+
+      - name: Commit if the feed changed
+        run: |
+          if [ -z "$(git status --porcelain index.html posts.json)" ]; then
+            echo "Feed unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html posts.json
+          git commit -m "Refresh X feed from @migratewithmatt"
+          git push
