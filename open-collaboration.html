@@ -27,345 +27,177 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>Open Collaboration: Teaching AI to Find You</title>
     <meta name="description" content="An open learning experiment in AI entity recognition - transparent, ethical, and collaborative">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ------------------------------------------------------------------
+           Basic stylesheet, matching index.html. Plain document: black text on
+           white, one column, hairline rules, no gradients, shadows or motion.
+           ------------------------------------------------------------------ */
+
+        :root {
+            --txt:   #111111;
+            --muted: #444444;
+            --dim:   #666666;
+            --line:  #cccccc;
+            --bg:    #ffffff;
+            --panel: #f6f6f6;
+            --link:  #00449e;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background: #f5f5f5;
+            font-family: var(--sans);
+            line-height: 1.6;
+            font-size: 16px;
+            color: var(--txt);
+            background: var(--bg);
         }
-        
+
+        a { color: var(--link); }
+
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .hero .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            opacity: 0.95;
-        }
-        
-        .hero .tagline {
-            font-size: 1.2em;
-            font-style: italic;
-            opacity: 0.9;
-        }
-        
-        .container {
-            max-width: 1000px;
+            border-bottom: 1px solid var(--line);
+            padding: 36px 20px 28px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 20px;
         }
-        
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle { font-size: 1.1rem; color: var(--muted); }
+        .hero .tagline { font-style: italic; color: var(--dim); }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         .nav-links {
-            background: white;
-            padding: 20px;
-            margin: -40px auto 40px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 800px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
         }
-        
-        .nav-links a {
-            display: inline-block;
-            margin: 5px 10px;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        
-        .nav-links a:hover {
-            background: #5568d3;
-        }
-        
+
+        .nav-links a { margin-right: 16px; }
+
         section {
-            background: white;
-            margin: 40px 0;
-            padding: 50px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px 0;
+            border-bottom: 1px solid var(--line);
         }
-        
+
         h2 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.25;
         }
-        
+
         h3 {
-            color: #764ba2;
-            font-size: 1.8em;
-            margin: 35px 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 22px 0 10px;
         }
-        
+
         h4 {
-            color: #555;
-            font-size: 1.3em;
-            margin: 25px 0 10px 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 18px 0 8px;
         }
-        
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-        }
-        
-        ul, ol {
-            margin: 15px 0 25px 30px;
-        }
-        
-        li {
-            margin: 10px 0;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-        
+
+        p { margin-bottom: 14px; }
+
+        ul, ol { margin: 12px 0 18px 24px; }
+        li { margin: 5px 0; }
+
         .principle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 18px 0;
         }
-        
+
         .principle-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 1px solid var(--line);
+            padding: 14px;
         }
-        
-        .principle-card h4 {
-            color: white;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            margin-top: 0;
+
+        .principle-card h4 { margin-top: 0; }
+        .principle-card p { margin: 0; }
+
+        /* Boxes: one plain convention -- a rule on the left, a grey fill. */
+        .question-box,
+        .thought-box,
+        .action-box,
+        .highlight-box {
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--dim);
+            background: var(--panel);
+            padding: 14px 16px;
+            margin: 18px 0;
         }
-        
-        .principle-card p {
-            margin: 0;
-            line-height: 1.7;
-            font-size: 1em;
-        }
-        
-        .question-box {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-        
-        .question-box h4 {
-            color: #856404;
-            margin-top: 0;
-        }
-        
-        .thought-box {
-            background: #e8f4ff;
-            border-left: 5px solid #0066cc;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .thought-box h4 {
-            color: #0052a3;
-            margin-top: 0;
-        }
-        
-        .action-box {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .action-box h4 {
-            color: #155724;
-            margin-top: 0;
-        }
-        
+
+        .question-box h4,
+        .thought-box h4,
+        .action-box h4,
+        .highlight-box h3 { margin-top: 0; }
+
+        .highlight-box p:last-child { margin-bottom: 0; }
+
         .guidelines {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
+            gap: 16px;
+            margin: 18px 0;
         }
-        
-        .do-box {
-            background: #d4edda;
-            padding: 25px;
-            border-radius: 8px;
-            border: 2px solid #28a745;
+
+        .do-box, .dont-box {
+            border: 1px solid var(--line);
+            padding: 14px;
         }
-        
-        .dont-box {
-            background: #f8d7da;
-            padding: 25px;
-            border-radius: 8px;
-            border: 2px solid #dc3545;
-        }
-        
-        .do-box h3 {
-            color: #155724;
-            margin-top: 0;
-        }
-        
-        .dont-box h3 {
-            color: #721c24;
-            margin-top: 0;
-        }
-        
-        .do-box ul, .dont-box ul {
-            list-style: none;
-            margin-left: 0;
-        }
-        
-        .do-box li::before {
-            content: '✅ ';
-            margin-right: 10px;
-        }
-        
-        .dont-box li::before {
-            content: '❌ ';
-            margin-right: 10px;
-        }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 8px;
-            margin: 40px 0;
-            text-align: center;
-        }
-        
-        .highlight-box h3 {
-            color: white;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        
-        .highlight-box p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 0;
-        }
-        
+
+        .do-box h3, .dont-box h3 { margin-top: 0; }
+
+        .do-box ul, .dont-box ul { list-style: none; margin-left: 0; }
+
+        .do-box li::before { content: 'Do: '; color: var(--dim); }
+        .dont-box li::before { content: 'Don\2019t: '; color: var(--dim); }
+
         .cta-section {
-            background: #f8f9fa;
-            padding: 50px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 50px 0;
-            border: 3px solid #667eea;
+            border: 1px solid var(--line);
+            padding: 20px;
+            margin: 24px 0;
         }
-        
-        .cta-section h2 {
-            color: #667eea;
-            border: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: #555;
-        }
-        
+
+        .cta-section h2 { margin-bottom: 10px; }
+
         .btn-large {
             display: inline-block;
-            padding: 18px 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 8px 16px;
+            margin: 6px 10px 0 0;
+            border: 1px solid var(--line);
+            background: var(--panel);
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin: 10px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
-        
-        .btn-large:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-        }
-        
+
         footer {
-            background: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 50px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            padding: 24px 20px 40px;
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            color: var(--dim);
         }
-        
-        footer p {
-            color: #666;
-            margin: 10px 0;
-        }
-        
-        footer a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2em;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2em;
-            }
-            
-            section {
-                padding: 30px 20px;
-            }
-            
-            .guidelines {
-                grid-template-columns: 1fr;
-            }
-            
-            .principle-grid {
-                grid-template-columns: 1fr;
-            }
+
+        footer p { margin: 6px 0; }
+
+        @media (max-width: 620px) {
+            .hero h1 { font-size: 1.7rem; }
+            .guidelines { grid-template-columns: 1fr; }
+            .principle-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -457,7 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </ul>
             </div>
             
-            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            <hr style="margin: 24px 0; border: none; border-top: 1px solid #cccccc;">
             
             <div class="question-box">
                 <h4>🤔 Verification & Truth</h4>
@@ -474,7 +306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </ul>
             </div>
             
-            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            <hr style="margin: 24px 0; border: none; border-top: 1px solid #cccccc;">
             
             <div class="question-box">
                 <h4>🤔 Resource Distribution</h4>
@@ -491,7 +323,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </ul>
             </div>
             
-            <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+            <hr style="margin: 24px 0; border: none; border-top: 1px solid #cccccc;">
             
             <div class="question-box">
                 <h4>🤔 Gaming vs. Optimization</h4>
