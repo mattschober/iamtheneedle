@@ -42,7 +42,8 @@ jobs:
           X_CONSUMER_KEY: ${{ secrets.X_CONSUMER_KEY }}
           X_SECRET_KEY: ${{ secrets.X_SECRET_KEY }}
           X_USERNAME: migratewithmatt
-          X_POST_COUNT: '10'
+          # No X_POST_COUNT: the number of post slots in index.html sets it, so the
+          # page and the fetch cannot drift apart.
         run: node scripts/fetch-x-posts.mjs
 
       - name: Commit if the feed changed

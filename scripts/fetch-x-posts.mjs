@@ -2,6 +2,12 @@
 /**
  * Writes the most recent posts from an X account into index.html as plain HTML.
  *
+ * The posts are not stacked in one feed box. index.html carries numbered slots --
+ * <!-- X_POST:1:START --> ... <!-- X_POST:1:END --> -- spaced down the document, and
+ * this script writes one post into each, newest first. Add or move a pair of markers
+ * in the page and the next run follows; the number of slots is what decides how many
+ * posts are fetched unless X_POST_COUNT says otherwise.
+ *
  * The page is static by design: nothing on it fetches from X at render time, so a
  * crawler that executes no JavaScript reads the same posts a browser does. Freshness
  * comes from running this script on a schedule (see .github/workflows/x-feed.yml)
@@ -16,7 +22,8 @@
  *   X_CONSUMER_KEY  \ fallback used only when X_BEARER_TOKEN is absent: the app's API
  *   X_SECRET_KEY    / key and secret, exchanged for an app-only bearer at run time.
  *   X_USERNAME      handle to read, without the @. Default: migratewithmatt
- *   X_POST_COUNT    how many posts to publish, 5-100. Default: 10
+ *   X_POST_COUNT    how many posts to publish, 5-100. Default: the number of slots
+ *                   found in index.html.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -27,12 +34,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_FILE = join(ROOT, 'posts.json');
 const PAGE_FILE = join(ROOT, 'index.html');
 
-const START = '<!-- X_POSTS:START -->';
-const END = '<!-- X_POSTS:END -->';
-const INDENT = '                    ';
+const slotStart = (n) => `<!-- X_POST:${n}:START -->`;
+const slotEnd = (n) => `<!-- X_POST:${n}:END -->`;
+const META_START = '<!-- X_POSTS:META:START -->';
+const META_END = '<!-- X_POSTS:META:END -->';
 
 const USERNAME = (process.env.X_USERNAME || 'migratewithmatt').replace(/^@/, '');
-const COUNT = Math.min(100, Math.max(5, Number(process.env.X_POST_COUNT) || 10));
 const RENDER_ONLY = process.argv.includes('--render-only');
 
 /* ---------- X API ---------- */
@@ -100,19 +107,19 @@ async function resolveToken() {
     return token;
 }
 
-async function fetchPosts(token) {
+async function fetchPosts(token, count) {
     const user = await api(`users/by/username/${encodeURIComponent(USERNAME)}`, token);
     if (!user.data?.id) throw new Error(`No X account found for @${USERNAME}`);
 
     const query = new URLSearchParams({
-        max_results: String(Math.max(5, COUNT)),
+        max_results: String(Math.max(5, count)),
         exclude: 'retweets,replies',
         'tweet.fields': 'created_at,entities',
     });
     const timeline = await api(`users/${user.data.id}/tweets?${query}`, token);
     const tweets = timeline.data || [];
 
-    return tweets.slice(0, COUNT).map((t) => ({
+    return tweets.slice(0, count).map((t) => ({
         id: t.id,
         text: expandLinks(t.text, t.entities),
         created_at: t.created_at,
@@ -157,60 +164,105 @@ const DATE = new Intl.DateTimeFormat('en-US', {
     month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC',
 });
 
-function renderBlock(feed) {
-    const line = (depth, s) => INDENT + '    '.repeat(depth) + s;
-    const out = [];
+/** One post, as the markup that goes between a pair of slot markers. */
+function renderPost(feed, post, position, total, indent) {
+    const stamp = new Date(post.created_at);
+    const line = (depth, str) => indent + '    '.repeat(depth) + str;
+    const pad = (n) => String(n).padStart(2, '0');
 
-    if (!feed.posts.length) {
-        out.push(line(0, '<div class="xbody">'));
-        out.push(line(1, '<p class="xempty">'));
-        out.push(line(2, 'The feed has not been written yet. The ten most recent posts are at'));
-        out.push(line(2, `<a href="https://x.com/${feed.username}" rel="me noopener">x.com/${feed.username}</a>.`));
-        out.push(line(1, '</p>'));
-        out.push(line(0, '</div>'));
-        return out.join('\n');
-    }
+    return [
+        line(0, '<aside class="xdrop">'),
+        line(1, '<div class="xdrop-meta">'),
+        line(2, `<span class="xdrop-tag">Live signal &middot; ${pad(position)} / ${pad(total)}</span>`),
+        line(2, `<span class="xhandle">@${feed.username}</span>`),
+        line(2, `<time datetime="${stamp.toISOString()}">${DATE.format(stamp)}</time>`),
+        line(2, `<a href="${post.url}" rel="nofollow noopener">Open on X &rarr;</a>`),
+        line(1, '</div>'),
+        line(1, `<p class="xdrop-text">${renderText(post.text)}</p>`),
+        line(0, '</aside>'),
+    ].join('\n');
+}
 
-    out.push(line(0, '<div class="xbody">'));
-    out.push(line(1, '<ol class="xposts">'));
-    for (const post of feed.posts) {
-        const stamp = new Date(post.created_at);
-        out.push(line(2, '<li class="xpost">'));
-        out.push(line(3, '<div class="xpost-meta">'));
-        out.push(line(4, `<span class="xhandle">@${feed.username}</span>`));
-        out.push(line(4, `<time datetime="${stamp.toISOString()}">${DATE.format(stamp)}</time>`));
-        out.push(line(4, `<a href="${post.url}" rel="nofollow noopener">Open &rarr;</a>`));
-        out.push(line(3, '</div>'));
-        out.push(line(3, `<p class="xpost-text">${renderText(post.text)}</p>`));
-        out.push(line(2, '</li>'));
-    }
-    out.push(line(1, '</ol>'));
-    out.push(line(0, '</div>'));
+/** A slot with no post to put in it: say so, and point at the profile. */
+function renderEmptySlot(feed, position, total, indent) {
+    const line = (depth, str) => indent + '    '.repeat(depth) + str;
+    const pad = (n) => String(n).padStart(2, '0');
 
+    return [
+        line(0, '<aside class="xdrop is-empty">'),
+        line(1, '<div class="xdrop-meta">'),
+        line(2, `<span class="xdrop-tag">Live signal &middot; ${pad(position)} / ${pad(total)}</span>`),
+        line(2, `<a href="https://x.com/${feed.username}" rel="me noopener">Open on X &rarr;</a>`),
+        line(1, '</div>'),
+        line(1, `<p class="xdrop-text">No post written into this slot yet. The account is at `
+            + `<a href="https://x.com/${feed.username}" rel="me noopener">x.com/${feed.username}</a>.</p>`),
+        line(0, '</aside>'),
+    ].join('\n');
+}
+
+/** The line in section 01 that reports what the last run wrote. */
+function renderMeta(feed, filled, indent) {
     const written = new Date(feed.fetched_at);
-    out.push(line(0, '<div class="xfoot">'));
-    out.push(line(1, `${feed.posts.length} post${feed.posts.length === 1 ? '' : 's'} &middot; written into this page `
-        + `<time datetime="${written.toISOString()}">${DATE.format(written)}</time>`));
-    out.push(line(0, '</div>'));
+    return indent + `<p class="xmeta">${filled} post${filled === 1 ? '' : 's'} written into this page `
+        + `<time datetime="${written.toISOString()}">${DATE.format(written)}</time>`
+        + ` &middot; <a href="https://x.com/${feed.username}" rel="me noopener">x.com/${feed.username}</a>`
+        + ` &middot; <a href="/posts.json">posts.json</a></p>`;
+}
 
-    return out.join('\n');
+/** How many numbered slots index.html carries, counted from 1 upward. */
+function countSlots(page) {
+    let n = 0;
+    while (page.includes(slotStart(n + 1)) && page.includes(slotEnd(n + 1))) n += 1;
+    return n;
+}
+
+/**
+ * Replace whatever sits between a pair of markers, keeping the markers and the
+ * indentation the opening one was written at.
+ */
+function replaceRegion(page, start, end, render) {
+    const open = page.indexOf(start);
+    const close = page.indexOf(end);
+    if (open === -1 || close === -1 || close < open) {
+        throw new Error(`Could not find ${start} / ${end} markers in index.html`);
+    }
+
+    const indent = page.slice(page.lastIndexOf('\n', open) + 1, open);
+    if (/\S/.test(indent)) {
+        throw new Error(`${start} must be the first thing on its line in index.html`);
+    }
+
+    return page.slice(0, open + start.length)
+        + '\n' + render(indent) + '\n' + indent
+        + page.slice(close);
 }
 
 async function writePage(feed) {
     const page = await readFile(PAGE_FILE, 'utf8');
-    const open = page.indexOf(START);
-    const close = page.indexOf(END);
-    if (open === -1 || close === -1 || close < open) {
-        throw new Error(`Could not find ${START} / ${END} markers in index.html`);
+    const slots = countSlots(page);
+    if (!slots) throw new Error('index.html carries no <!-- X_POST:1:START --> slot to write into.');
+
+    let next = page;
+    for (let i = 1; i <= slots; i += 1) {
+        const post = feed.posts[i - 1];
+        next = replaceRegion(next, slotStart(i), slotEnd(i), (indent) =>
+            post
+                ? renderPost(feed, post, i, slots, indent)
+                : renderEmptySlot(feed, i, slots, indent));
     }
 
-    const next = page.slice(0, open + START.length)
-        + '\n' + renderBlock(feed) + '\n'
-        + page.slice(close);
+    const filled = Math.min(slots, feed.posts.length);
+    next = replaceRegion(next, META_START, META_END, (indent) => renderMeta(feed, filled, indent));
 
-    if (next === page) return false;
+    if (feed.posts.length > slots) {
+        console.warn(`${feed.posts.length} post(s) for ${slots} slot(s); the oldest ${feed.posts.length - slots} were not published.`);
+    } else if (feed.posts.length < slots) {
+        console.warn(`${slots} slot(s) but only ${feed.posts.length} post(s); the rest say so on the page.`);
+    }
+
+    if (next === page) return { changed: false, slots, filled };
     await writeFile(PAGE_FILE, next);
-    return true;
+    return { changed: true, slots, filled };
 }
 
 /* ---------- entry ---------- */
@@ -221,7 +273,11 @@ async function main() {
     if (RENDER_ONLY) {
         feed = JSON.parse(await readFile(DATA_FILE, 'utf8'));
     } else {
-        const posts = await fetchPosts(await resolveToken());
+        // The page decides how many posts it has room for, unless asked otherwise.
+        const slots = countSlots(await readFile(PAGE_FILE, 'utf8'));
+        const count = Math.min(100, Math.max(5, Number(process.env.X_POST_COUNT) || slots || 10));
+
+        const posts = await fetchPosts(await resolveToken(), count);
         if (!posts.length) throw new Error(`X returned no posts for @${USERNAME}; leaving the page as it is.`);
 
         feed = {
@@ -233,8 +289,8 @@ async function main() {
         await writeFile(DATA_FILE, JSON.stringify(feed, null, 2) + '\n');
     }
 
-    const changed = await writePage(feed);
-    console.log(`${feed.posts.length} post(s) for @${feed.username}; index.html ${changed ? 'updated' : 'already current'}.`);
+    const { changed, slots, filled } = await writePage(feed);
+    console.log(`${filled} of ${slots} slot(s) filled for @${feed.username}; index.html ${changed ? 'updated' : 'already current'}.`);
 }
 
 main().catch((err) => {
