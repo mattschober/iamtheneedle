@@ -26,336 +26,143 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <title>Version History - AI Training Bio</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ------------------------------------------------------------------
+           Basic stylesheet, matching the rest of the site. Plain document:
+           black text on white, one column, hairline rules, no gradients,
+           no shadows, no motion.
+           ------------------------------------------------------------------ */
+
+        :root {
+            --txt:   #111111;
+            --muted: #444444;
+            --dim:   #666666;
+            --line:  #cccccc;
+            --bg:    #ffffff;
+            --panel: #f6f6f6;
+            --link:  #00449e;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--sans);
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
+            font-size: 16px;
+            color: var(--txt);
+            background: var(--bg);
         }
-        
+
+        a { color: var(--link); }
+
         .container {
-            max-width: 900px;
+            max-width: 760px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 24px 20px 40px;
         }
-        
+
+        .back-link { display: inline-block; margin-bottom: 20px; }
+
         header {
-            border-bottom: 3px solid #0066cc;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 18px;
+            margin-bottom: 24px;
         }
-        
-        h1 {
-            color: #0066cc;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+
+        h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+
+        .subtitle { color: var(--muted); }
+
+        h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
+        h3 { font-size: 1.15rem; font-weight: 700; margin: 20px 0 8px; }
+        h4 { font-size: 1rem; font-weight: 700; margin: 16px 0 6px; }
+
+        p { margin-bottom: 14px; }
+
+        ul, ol { margin: 12px 0 18px 24px; }
+        li { margin: 5px 0; }
+
+        .info-box,
+        .invitation,
+        .website-cta,
+        .ethical-considerations {
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--dim);
+            background: var(--panel);
+            padding: 14px 16px;
+            margin: 18px 0;
         }
-        
-        .subtitle {
-            color: #666;
-            font-size: 1.1em;
-        }
-        
-        .back-link {
-            display: inline-block;
-            color: #0066cc;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e0e0e0;
-        }
-        
+
+        .info-box p:last-child,
+        .invitation p:last-child,
+        .website-cta p:last-child { margin-bottom: 0; }
+
+        /* ---- Version timeline ---- */
+        .timeline { margin: 24px 0; }
+
         .version {
-            position: relative;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 6px;
-            border-left: 4px solid #0066cc;
+            border: 1px solid var(--line);
+            padding: 16px;
+            margin-bottom: 18px;
         }
-        
-        .version.current {
-            background: #e8f4ff;
-            border-left-color: #00aa00;
-        }
-        
-        .version::before {
-            content: '';
-            position: absolute;
-            left: -44px;
-            top: 25px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #0066cc;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #0066cc;
-        }
-        
-        .version.current::before {
-            background: #00aa00;
-            box-shadow: 0 0 0 2px #00aa00;
-        }
-        
+
+        .version.current { border-left: 4px solid var(--dim); }
+
         .version-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .version-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            color: #0066cc;
-        }
-        
-        .version.current .version-title::after {
-            content: ' (Current)';
-            color: #00aa00;
-            font-size: 0.7em;
-            font-weight: 500;
-        }
-        
-        .version-date {
-            color: #666;
-            font-size: 0.95em;
-        }
-        
-        .changes {
-            margin: 15px 0;
-        }
-        
-        .changes h3 {
-            font-size: 1.1em;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
             margin-bottom: 10px;
-            color: #555;
         }
-        
-        .changes ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .changes li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .changes li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #0066cc;
-        }
-        
-        .actions {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
+
+        .version-title { font-size: 1.2rem; font-weight: 700; margin: 0; }
+        .version-date { font-size: 0.9rem; color: var(--dim); }
+
+        .changes { margin-top: 10px; }
+
+        .actions { margin-top: 12px; }
+
+        .btn, .btn-secondary, .btn-website {
             display: inline-block;
-            padding: 8px 16px;
-            background: #0066cc;
-            color: white;
+            padding: 7px 14px;
+            margin: 4px 8px 0 0;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--link);
             text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9em;
-            transition: background 0.2s;
         }
-        
-        .btn:hover {
-            background: #0052a3;
-        }
-        
-        .btn-secondary {
-            background: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        
-        .info-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-        
-        .info-box h3 {
-            color: #856404;
-            margin-bottom: 10px;
-        }
-        
-        .info-box p {
-            color: #856404;
-            margin: 0;
-        }
-        
-        .collaboration-section {
-            margin: 50px 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-            color: white;
-        }
-        
-        .collaboration-section h2 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-        
-        .collaboration-section h3 {
-            color: white;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-        
-        .collaboration-section h4 {
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-        
-        .collaboration-section p {
-            font-size: 1.05em;
-            line-height: 1.8;
-            opacity: 0.95;
-        }
-        
-        .principles {
-            margin: 30px 0;
-        }
-        
+
+        /* ---- Principles / collaboration ---- */
+        .principles, .collaboration-section { margin: 24px 0; }
+
         .principle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 18px 0;
         }
-        
+
         .principle-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--line);
+            padding: 14px;
         }
-        
-        .principle-card h4 {
-            color: white;
-            font-size: 1.1em;
-        }
-        
-        .principle-card p {
-            margin: 0;
-            font-size: 0.95em;
-        }
-        
-        .ethical-considerations {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .ethical-considerations ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-        
-        .ethical-considerations li {
-            margin: 12px 0;
-            line-height: 1.8;
-        }
-        
-        .invitation {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 8px;
+
+        .principle-card h4 { margin-top: 0; }
+        .principle-card p:last-child { margin-bottom: 0; }
+
+        footer {
+            border-top: 1px solid var(--line);
             margin-top: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            text-align: center;
+            padding-top: 18px;
+            font-size: 0.95rem;
+            color: var(--dim);
         }
-        
-        .invitation h3 {
-            margin-top: 0;
-        }
-        
-        .website-cta {
-            text-align: center;
-            margin: 50px 0 30px 0;
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-        }
-        
-        .website-cta h3 {
-            color: #0066cc;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        
-        .website-cta p {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 25px;
-        }
-        
-        .btn-website {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-website:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+
+        @media (max-width: 620px) {
+            h1 { font-size: 1.7rem; }
+            .principle-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
