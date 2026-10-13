@@ -1,42 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="I Am The Needle">
   <defs>
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="needle-grad" x1="20%" y1="20%" x2="80%" y2="80%">
-      <stop offset="0%" style="stop-color:#f0f0f0;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#d0d0d0;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#909090;stop-opacity:1" />
+    <linearGradient id="hex-grad" gradientUnits="userSpaceOnUse" x1="4.45" y1="50" x2="95.55" y2="50">
+      <stop offset="0" stop-color="#6F15D3"/>
+      <stop offset="0.25" stop-color="#AA17B6"/>
+      <stop offset="0.5" stop-color="#F82576"/>
+      <stop offset="0.75" stop-color="#FA5C38"/>
+      <stop offset="1" stop-color="#FA8905"/>
     </linearGradient>
   </defs>
 
-  <!-- Background circle -->
-  <circle cx="50" cy="50" r="48" fill="url(#bg-grad)"/>
-
-  <!-- Ampersand - styled like the image -->
-  <text x="50" y="72"
-        font-family="Georgia, serif"
-        font-size="72"
-        font-weight="bold"
-        fill="white"
-        text-anchor="middle">&amp;</text>
-
-  <!-- Needle - passing through the ampersand diagonally -->
-  <!-- Needle body -->
-  <path d="M 28 22
-           Q 30 24, 32 28
-           L 70 88
-           L 72 86
-           L 34 26
-           Q 32 22, 28 22 Z"
-        fill="url(#needle-grad)"
-        stroke="#888"
-        stroke-width="0.5"/>
-
-  <!-- Needle eye (hole) -->
-  <ellipse cx="31" cy="26" rx="3" ry="5" fill="none" stroke="white" stroke-width="2" transform="rotate(-55 31 26)"/>
-
-  <!-- Needle point -->
-  <path d="M 70 88 L 74 94 L 72 86 Z" fill="#666"/>
+  <!-- Rounded hexagon: the path is inset by the corner radius, then stroked
+       at twice that radius with round joins, which rounds all six corners. -->
+  <path d="M 50 6.89 L 89.55 29.17 L 89.55 70.83 L 50 93.11 L 10.45 70.83 L 10.45 29.17 Z"
+        fill="url(#hex-grad)"
+        stroke="url(#hex-grad)"
+        stroke-width="12"
+        stroke-linejoin="round"/>
 </svg>
