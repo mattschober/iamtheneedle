@@ -1,8 +1,8 @@
 /*
- * Needlepoint — a hybrid text for humans, hybrids, and bots.
+ * Needlepoint Roman — a hybrid text for humans, hybrids, and bots.
  *
  * Progressive enhancement only. The HTML source stays plain, byte-identical text
- * for every reader; this script draws the Needlepoint layer on top for people
+ * for every reader; this script draws the Needlepoint Roman layer on top for people
  * whose browsers run it:
  *   - each letter gets a five-dot binary rail beneath it (A = 1 ... Z = 26)
  *   - each word ends in a checksum seal (sum of its letters, mod 32)
