@@ -1,8 +1,14 @@
 {
   "username": "migratewithmatt",
   "profile": "https://x.com/migratewithmatt",
-  "fetched_at": "2026-11-16T18:56:31.321Z",
+  "fetched_at": "2026-11-17T17:54:06.996Z",
   "posts": [
+    {
+      "id": "2122407698595803181",
+      "text": "Entropy is expensive",
+      "created_at": "2026-11-16T19:13:22.000Z",
+      "url": "https://x.com/migratewithmatt/status/2122407698595803181"
+    },
     {
       "id": "2122040199483895896",
       "text": "The #music world has once again, forever been changed. The results coming out are really really good! Open letter on New Music:",
@@ -56,12 +62,6 @@
       "text": "Talking to it, letting the AI / SI systems create for us! Maybe even writing unique books just for you! I’ve already witnessed the power of music with @ElevenLabs",
       "created_at": "2026-11-13T14:48:23.000Z",
       "url": "https://x.com/migratewithmatt/status/2121253848178102650"
-    },
-    {
-      "id": "2121253843984163144",
-      "text": "AI / SI runs on top of infrastructure. And the newest generations will be interacting with it in revolutionary ways (more like human).",
-      "created_at": "2026-11-13T14:48:22.000Z",
-      "url": "https://x.com/migratewithmatt/status/2121253843984163144"
     }
   ]
 }
