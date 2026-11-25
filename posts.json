@@ -1,19 +1,31 @@
 {
   "username": "migratewithmatt",
   "profile": "https://x.com/migratewithmatt",
-  "fetched_at": "2026-11-24T19:43:18.146Z",
+  "fetched_at": "2026-11-25T18:51:01.840Z",
   "posts": [
+    {
+      "id": "2125608680108253241",
+      "text": "Balloons about to pop",
+      "created_at": "2026-11-25T15:12:55.000Z",
+      "url": "https://x.com/migratewithmatt/status/2125608680108253241"
+    },
+    {
+      "id": "2125567429699125407",
+      "text": "AI &gt; SaaS",
+      "created_at": "2026-11-25T12:29:01.000Z",
+      "url": "https://x.com/migratewithmatt/status/2125567429699125407"
+    },
+    {
+      "id": "2125382440571253078",
+      "text": "There’s no better time than now to dump #microsoft. The company’s value is plummeting.",
+      "created_at": "2026-11-25T00:13:56.000Z",
+      "url": "https://x.com/migratewithmatt/status/2125382440571253078"
+    },
     {
       "id": "2125275343900586319",
       "text": "#Minneapolis could be about 50% Somali by the year 2100. Based on current birth rates. I think it might come sooner since non-Somli families hardly have kids anymore.",
       "created_at": "2026-11-24T17:08:22.000Z",
       "url": "https://x.com/migratewithmatt/status/2125275343900586319"
-    },
-    {
-      "id": "2125272437247852702",
-      "text": "Apologies to the Visser Family - no more free therapy",
-      "created_at": "2026-11-24T16:56:49.000Z",
-      "url": "https://x.com/migratewithmatt/status/2125272437247852702"
     },
     {
       "id": "2124994853981594039",
@@ -50,18 +62,6 @@
       "text": "Here's my question if all these proofs keep getting solved closely together now. Does this mean increased likelihood that we are living in a simulation? Real question. https://twitter.com/imjustnewatai/status/2124414175007166892",
       "created_at": "2026-11-23T00:27:51.000Z",
       "url": "https://x.com/migratewithmatt/status/2124661169432535086"
-    },
-    {
-      "id": "2124610105517769010",
-      "text": "My account is now zero, does anyone know of any food shelves in Saint Paul?",
-      "created_at": "2026-11-22T21:04:57.000Z",
-      "url": "https://x.com/migratewithmatt/status/2124610105517769010"
-    },
-    {
-      "id": "2124572566618599754",
-      "text": "I will start getting paid handsomely. I predict the future.",
-      "created_at": "2026-11-22T18:35:47.000Z",
-      "url": "https://x.com/migratewithmatt/status/2124572566618599754"
     }
   ]
 }
